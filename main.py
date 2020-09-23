@@ -1,9 +1,9 @@
 from books import get_book, parse_book
 
 books = [
-	('https://www.gutenberg.org/files/1342/1342-h/1342-h.htm', 'Pride and Prejudice'),
+	# ('https://www.gutenberg.org/files/1342/1342-h/1342-h.htm', 'Pride and Prejudice'),
 	# ('https://www.gutenberg.org/files/16328/16328-h/16328-h.htm', 'Beowulf')
-	# ('https://www.gutenberg.org/files/25344/25344-h/25344-h.htm', 'Scarlet Letter')
+	('https://www.gutenberg.org/files/25344/25344-h/25344-h.htm', 'Scarlet Letter')
 ]
 
 for book in books:
