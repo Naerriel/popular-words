@@ -6,18 +6,6 @@ from bs4 import BeautifulSoup
 def get_book(url):
 	return requests.get(url).text
 
-
-	# chapters = soup.find_all('div', class_='chapter')
-
-
-	# result = []
-
-	# for chapter in chapters:
-		# text = chapter.get_text().encode('utf-8')
-		# result.append(text)
-
-	# return ''.join(result)
-
 def get_class(soup_tag):
 	result = ''
 	for class_name in soup_tag.get_attribute_list('class'):
@@ -26,8 +14,8 @@ def get_class(soup_tag):
 
 def parse_tag(soup_tag):
 	# parsed tag has following structure:
-	# (name, classes, length of text in those tags)
-	return (soup_tag.name, soup_tag.name + get_class(soup_tag), soup_tag.find(text=True, recursive=False) or '')
+	# (name, classes, text in this tag)
+	return (soup_tag.name, soup_tag.name + get_class(soup_tag), " ".join(soup_tag.find_all(text=True, recursive=False)))
 
 def are_tags_same(tag1, tag2):
 	return tag1[0] == tag2[0] and tag1[1] == tag2[1]
@@ -76,20 +64,16 @@ def get_popular_tags(chars_per_tag):
 	return result
 
 def get_tags_with_content(tags):
-	chars_per_tag = get_chars_per_tag(tags)
-	print('chars per tag = ', chars_per_tag)
-	return get_popular_tags(chars_per_tag)
+	return get_popular_tags(get_chars_per_tag(tags))
 
 def get_content(tags):
 	tags_with_content = get_tags_with_content(tags)
-	print('tags with content = ', tags_with_content)
 	content = ''
 	fillers_length = 0
 	last_content = ''
 	best_content = ''
 
 	for tag in tags:
-		print(len(content), len(last_content), fillers_length)
 		if tag[1] in tags_with_content:
 			content += tag[2]
 			fillers_length = 0
@@ -109,10 +93,4 @@ def get_content(tags):
 def parse_book(bookHTML):
 	soup = BeautifulSoup(bookHTML, 'html.parser')
 	tags = parse_tags(soup)
-	content = get_content(tags)
-
-	print content[:1000]
-	print content[-1000:]
-
-	# print(tags)
-	# print(tags[500:530])
+	return get_content(tags).encode('utf-8')
