@@ -8,12 +8,8 @@ from src.books_urls import get_urls
 
 books = get_urls()
 
-# file = open('book.txt', 'r')
-# words = clean_words(file.read())
-# popular_words = generate_chart(words)
 
-
-def main():
+def get_popular_words():
     for book in books:
         book_content = get_book(book[0])
         words = clean_words(book_content)
