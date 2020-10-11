@@ -1,12 +1,21 @@
-from books import get_book, parse_book
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
-books = [
-	('https://www.gutenberg.org/files/1342/1342-h/1342-h.htm', 'Pride and Prejudice'),
-	# ('https://www.gutenberg.org/files/16328/16328-h/16328-h.htm', 'Beowulf')
-	# ('https://www.gutenberg.org/files/25344/25344-h/25344-h.htm', 'Scarlet Letter')
-]
+from src.book.book import get_book
+from src.clean import clean_words
+from src.chart import generate_chart
+from src.books_urls import get_urls
 
-for book in books:
-	book_html = get_book(book[0])
-	parsed_book = parse_book(book_html)
-	print (parsed_book)
+books = get_urls()
+
+# file = open('book.txt', 'r')
+# words = clean_words(file.read())
+# popular_words = generate_chart(words)
+
+
+def main():
+    for book in books:
+        book_content = get_book(book[0])
+        words = clean_words(book_content)
+        popular_words = generate_chart(words)
+        return popular_words
