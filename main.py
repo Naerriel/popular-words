@@ -23,5 +23,8 @@ def generate_chart():
     print(create_chart(parsed_books))
 
 
+generate_chart()
+
+
 def show_plot():
     src.plot.show_plot()
