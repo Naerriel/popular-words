@@ -15,11 +15,15 @@ def clean_words(text):
 
 
 def delete_punctuation(text):
-    table = str.maketrans('', '', string.punctuation + '“”‘’')
+    table = str.maketrans('', '', string.punctuation + '—”“”‘’')
     # return [w.translate(table) for w in words]
     return text.translate(table)
 
 
 def delete_stop_words(words):
-    stop_words = stopwords.words('english')
+    custom_words = [
+        'b', '1', 'elizabeth', 'collins', 'elizabeths', 'eliza', 'phillips',
+        'â', 'john', 'johns', 'andrew', 'thomas', 'hopkins'
+    ]
+    stop_words = stopwords.words('english') + custom_words
     return [w for w in words if not w in stop_words]
