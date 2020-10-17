@@ -15,7 +15,7 @@ def clean_words(text):
 
 
 def delete_punctuation(text):
-    table = str.maketrans('', '', string.punctuation + '“‘’')
+    table = str.maketrans('', '', string.punctuation + '“”‘’')
     # return [w.translate(table) for w in words]
     return text.translate(table)
 

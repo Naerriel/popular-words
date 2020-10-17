@@ -5,6 +5,7 @@ from src.book.book import get_book
 from src.clean import clean_words
 from src.words.main import create_chart
 from src.books_urls import get_urls
+import src.plot
 
 books = get_urls()
 
@@ -17,9 +18,10 @@ def generate_chart():
         book_content = get_book(book[0])
         words = clean_words(book_content)
 
-        parsed_books.append(book[1], words)
+        parsed_books.append((book[1], words))
 
-    create_chart(parsed_books)
+    print(create_chart(parsed_books))
 
 
-generate_chart()
+def show_plot():
+    src.plot.show_plot()
