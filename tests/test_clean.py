@@ -11,7 +11,7 @@ def test_clean_words():
 
 
 def test_delete_punctuation():
-    text = '''Text with, some punctuation: which isn't great.=)'''
+    text = '''Text with, some punctuation: which isn't ‘’great.=)'''
     clean_text = src.clean.delete_punctuation(text)
     assert clean_text == 'Text with some punctuation which isnt great'
 
